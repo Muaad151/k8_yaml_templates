@@ -1,0 +1,29 @@
+apiVersion : v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30222
+  selector:
+    app: nginx
+    tier: frontend
+    env: production
+
+
+# kubectl get svc -o wide
+# kubectl get service -o wide
+# kubectl describe service nginx-service
+# kubectl get svc nginx-service -o yaml
+# minikube service nginx-service --url
+# to make a svc of already einning deployment 
+# kubectl expose deploy nginx-deployment --port=80 --target-port=80 --name=nginx-service --type=NodePort
+# kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+# kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml

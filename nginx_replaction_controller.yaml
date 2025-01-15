@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+  replicas: 3
+
+# kubectl apply -f nginx_replaction_controller.yaml
+# kubectl get pods -o wide
+# kubectl replace -f nginx_replaction_controller.yaml
+# kubectl scale --replicas=5 -f nginx_replaction_controller.yaml
+# kubectl delete -f nginx_replaction_controller.yaml
+

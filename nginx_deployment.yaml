@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+      tier: frontend
+
+# kubectl get deployment -o wide
+# kubectl get deploy -o wide
+# kubectl rollout status deployment/nginx-deployment
+# kubectl rollout history deployment/nginx-deployment
+# kubectl rollout undo deployment/nginx-deployment --to-revision=1
+# kubectl set  image deployment/nginx-deployment <container_name>=nginx:1.15.0
+# kubectl create -f nginx_deployment.yaml --record --strategy=rolling|
+# to remember the command that was used 
+# kubectl scale deploy deploy_name --replicas=5 --record

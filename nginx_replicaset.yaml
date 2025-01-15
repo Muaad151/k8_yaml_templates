@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: nginx_replica_set
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx-2
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+          resource:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-2
+      tier: frontend
+
+#  kubectl replace -f nginx_replica_set.yaml
+#  kubectl scale --replicas=5 -f nginx_replica_set.yaml
+#  kubectl delete -f nginx_replica_set.yaml
+#  kubectl get replicaset -o wide
+#  kubectl describe replicaset nginx_replica_set
+#  kubectl edit replicaset nginx_replica_set
+#  kubectl get rs
+#  

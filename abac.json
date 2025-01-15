@@ -1,0 +1,26 @@
+ 
+[
+    {
+      "apiVersion": "abac.authorization.k8s.io/v1",
+      "kind": "Policy",
+      "user": "user1",
+      "group": "group1",
+      "resource": "pods",
+      "verb": "get",
+      "namespace": "default",
+      "resourceName": "mypod"
+    },
+    {
+      "apiVersion": "abac.authorization.k8s.io/v1",
+      "kind": "Policy",
+      "user": "user2",
+      "group": "group2",
+      "resource": "deployments",
+      "verb": "create",
+      "namespace": "default"
+    }
+  ]
+  
+
+// --authorization-mode=ABAC
+// --authorization-policy-file=/etc/kubernetes/policies/abac-policy.json

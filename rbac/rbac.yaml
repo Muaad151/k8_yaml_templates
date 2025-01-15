@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role  
+metadata:
+  name: developer
+rules:
+- apiGroups: [""] # core = "" , named = "networking.k8s.io"
+  resources: ["pods"]
+  resourceNames: ["nginx","redis"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["create"] 
+- apiGroups: [""] # for deployments apiGroups: ["apps"] 
+  resources: ["deployments"]
+  verbs: ["create"]
+
+# k create -f rbac.yaml
+
+# breif on API groups
+# for pods, services, namespaces, nodes, events, endpoints, and persistentvolumeclaims, the API group is "".
+# for deployments, daemonsets, replicasets, statefulsets, and jobs, the API group is "apps".
+# for ingresses, the API group is "networking.k8s.io".
+
+# withing 

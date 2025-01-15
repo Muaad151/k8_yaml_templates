@@ -1,0 +1,17 @@
+apiVersion: Certificates.K8.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: ajay-csr
+spec:
+  request: $(cat server.csr | base64 | tr -d '\n')
+  signerName: kubernetes.io/kubelet-serving
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+  groups:
+    - system:authenticated
+
+
+# k get csr
+# k certificate approve ajay-csr

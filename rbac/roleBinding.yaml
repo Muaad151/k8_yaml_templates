@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+subjects: # user details
+- kind: User
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+roleRef: # role details
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+group: system:masters
+
+# k get role 
+# k get rolebinding
+# k describe rolebindingw developer-binding
+
+#  u being an user u want to check what all u can do
+# k auth can-i get pods --as developer --namespace=dev

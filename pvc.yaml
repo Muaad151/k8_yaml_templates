@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  selector:
+    matchLabels:
+      type: aws
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "128Mi"
+  
+
+# if no pv avaialvle then pending state
+# persisitantVolumeReclaimPolicy: Retain // done by administeator in case of delete by user
+# for retain option administrator will go to the cloud provider and delete the volume manually

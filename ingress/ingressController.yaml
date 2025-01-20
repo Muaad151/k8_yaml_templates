@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: myapp.com
+    http:
+      paths:
+      - path: /myapp
+        pathType: Prefix
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80
+      - path: /myapp2
+        pathType: Prefix
+        backend:
+          service:
+            name: my-service2
+            port:
+              number: 80
+
+# imperatively create the ingress
+# kubectl create ingress --rule="host/path=service:port"
+# eg: kubectl create ingress --rule="wear.my-online-store.com/wear=wear-service:80"
+# layer 7 load balancer
+# by default k8 doesnt have ingress controller
+# u can use nginx or traefik or Contour or HAProxy or Istio
+# ingress controller is a pod that runs in the cluster
+# it watches for ingress resources and configures the load balancer accordingly
+# it can route traffic based on the host and path
+# it can also terminate SSL/TLS
+# it can also do SSL offloading
+# it can also do SSL re-encryption
+# it can also do SSL passthrough
+# it can also do SSL re-routing
+# it can also do SSL redirect
+# it can also do SSL re-write
+# it can also serve as a reverse proxy

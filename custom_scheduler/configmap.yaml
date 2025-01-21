@@ -7,3 +7,13 @@ leaderElection:
   retryPeriod: 2s
 profiles:
   - schedulerName: my-scheduler
+  plugins:
+      prefilter:
+        enabled:
+          - "MyCustomFilterPlugin"  
+    pluginConfig:
+      - name: "MyCustomFilterPlugin"
+        args: {}
+
+# k create configmap my-scheduler-config --from-file=my-scheduler-config.yaml -n kube-system
+# k edit deployment kube-scheduler -n kube-system

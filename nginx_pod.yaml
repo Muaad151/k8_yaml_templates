@@ -50,8 +50,32 @@ spec:
 
 
 
-
-
+# env differnt ways to set env variables
+#1. envFrom:
+#   - configMapRef:
+#       name: nginx-config
+#   - secretRef:
+#       name: nginx-secret
+#2. env:
+#   - name: ENVIRONMENT
+#     value: "production"
+#3. env:
+#   - name: ENVIRONMENT
+#     valueFrom:
+#       configMapKeyRef:
+#         name: nginx-config
+#         key: environment
+#4. env:
+#   - name: ENVIRONMENT
+#     valueFrom:
+#       secretKeyRef:
+#         name: nginx-secret
+#         key: environment
+#5. env:
+#   - name: ENVIRONMENT
+#     valueFrom:
+#       fieldRef:
+#         fieldPath: metadata.namespace
 
 
 

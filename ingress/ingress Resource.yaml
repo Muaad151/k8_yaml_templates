@@ -26,7 +26,8 @@ spec:
 
 # imperatively create the ingress
 # kubectl create ingress --rule="host/path=service:port"
-# eg: kubectl create ingress --rule="wear.my-online-store.com/wear=wear-service:80"
+# eg: kubectl create ingress --rule="=my-online-store.com/wear=wear-service:80"
+
 # layer 7 load balancer
 # by default k8 doesnt have ingress controller
 # u can use nginx or traefik or Contour or HAProxy or Istio

@@ -1,7 +1,21 @@
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: delayed-volume-sc
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: delayed-volume-sc
+# provisioner: kubernetes.io/no-provisioner
+# volumeBindingMode: WaitForFirstConsumer
 
+
+apiVersion: v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+
+subject: #user or group or service account
+  kind: User
+  name: ajay
+  apiGroup: rbac.authorization.k8s.io
+role:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io

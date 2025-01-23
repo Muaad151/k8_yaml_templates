@@ -4,9 +4,10 @@ metadata:
   name: my-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: myapp.com
+  - host: doc.myapp.com
     http:
       paths:
       - path: /myapp
@@ -21,6 +22,16 @@ spec:
         backend:
           service:
             name: my-service2
+            port:
+              number: 80
+  - host: web.myapp.com
+    http:
+      paths:
+      - path: /webapp
+        pathType: Prefix
+        backend:
+          service:
+            name: web-service
             port:
               number: 80
 
